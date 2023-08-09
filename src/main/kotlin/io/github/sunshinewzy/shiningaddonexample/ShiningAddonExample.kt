@@ -1,8 +1,9 @@
 package io.github.sunshinewzy.shiningaddonexample
 
 import io.github.sunshinewzy.shining.api.addon.ShiningAddon
+import io.github.sunshinewzy.shining.api.addon.registerListener
+import io.github.sunshinewzy.shining.api.event.guide.ShiningGuideOpenEvent
 import io.github.sunshinewzy.shining.api.event.guide.ShiningGuideTeamSetupEvent
-import io.github.sunshinewzy.shining.core.guide.team.GuideTeam.Companion.getGuideTeam
 
 object ShiningAddonExample : ShiningAddon() {
 
@@ -11,7 +12,7 @@ object ShiningAddonExample : ShiningAddon() {
     }
 
     override fun onEnable() {
-        addonManager.registerListener(ShiningGuideTeamSetupEvent::class.java) {
+        addonManager.registerListener<ShiningGuideTeamSetupEvent> {
             it.isCancelled = true
             it.player.sendMessage("Setting up teams...")
         }
